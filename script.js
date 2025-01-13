@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Send AJAX request to Web3Forms
       try {
-        const response = await fetch("https://api.web3forms.com/", {
+        const response = await fetch("https://formspree.io/f/xbllwona", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
