@@ -28,36 +28,35 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
       }
 
-      // Collect form data
-      const formData = new FormData(form);
-      const jsonData = Object.fromEntries(formData.entries());
+       // Collect form data
+        const formData = new FormData(form);
+        formData.append("access_key", "c54f0bfb-09bd-4c55-a11d-e0f4892796b9"); // Add Web3Forms access key
 
-      try {
-          const response = await fetch("https://formspree.io/f/xbllwona", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify(jsonData),
-          });
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData, // Web3Forms accepts FormData directly
+            });
 
-          if (response.ok) {
-              responseDiv.textContent = "Your inquiry has been sent successfully!";
-              responseDiv.className = "success";
-              form.reset();
-          } else {
-              responseDiv.textContent = "Something went wrong. Please try again later.";
-              responseDiv.className = "error";
-          }
-      } catch (error) {
-          responseDiv.textContent = "An error occurred. Please check your internet connection.";
-          responseDiv.className = "error";
-      }
+            const result = await response.json(); // Parse JSON response
 
-      responseDiv.style.display = "block";
-      setTimeout(() => {
-          responseDiv.style.display = "none";
-      }, 3000);
+            if (response.ok && result.success) {
+                responseDiv.textContent = "Your inquiry has been sent successfully!";
+                responseDiv.className = "success";
+                form.reset();
+            } else {
+                responseDiv.textContent = "Something went wrong. Please try again later.";
+                responseDiv.className = "error";
+            }
+        } catch (error) {
+            responseDiv.textContent = "An error occurred. Please check your internet connection.";
+            responseDiv.className = "error";
+        }
+
+        responseDiv.style.display = "block";
+        setTimeout(() => {
+            responseDiv.style.display = "none";
+        }, 3000);
   });
 });
 
