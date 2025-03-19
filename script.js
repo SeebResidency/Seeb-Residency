@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
        // Collect form data
         const formData = new FormData(form);
-        formData.append("access_key", "c54f0bfb-09bd-4c55-a11d-e0f4892796b9"); // Add Web3Forms access key
+        formData.append("access_key", "7daa6370-9149-43ba-a5aa-d6e5d7640b95"); // Add Web3Forms access key
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
